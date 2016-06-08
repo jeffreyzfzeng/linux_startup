@@ -66,11 +66,26 @@ void set_pos_bit()
 	return;
 }
 
+static inline char* strcpy_test(char* dst, const char* src)
+{
+	int d0, d1, d2;
+	__asm__ __volatile__(	"1:\n\t"
+				"lodsb\n\t"
+				"stosb\n\t"
+				"testb %%al, %%al\n\t"
+				"jne 1b"
+				: "=&S"(d0), "=&D"(d1), "=&a"(d2)
+				: "0"(src), "1"(dst)
+				: "memory");
+	printf("d0: %x d1: %x, d2: %x\n", d0, d1, d2);
+	return dst;
+}
+
 int main(int argc, char** argv)
 {
 	if (2 != argc)
 	{
-		char* warn_string = "Input parameters should be as follow:\n1: normal add\n2: atomic add\n3: decrease and compare\n4: set and reset bit in specific position\n";
+		char* warn_string = "Input parameters should be as follow:\n1: normal add\n2: atomic add\n3: decrease and compare\n4: set and reset bit in specific position\n5: string copy demo\n";
 		int warn_len = strlen(warn_string);
 		asm("movl $1, %%eax; \n\t"
 			"movl $1, %%edi; \n\t"
@@ -99,6 +114,14 @@ int main(int argc, char** argv)
 			case 4:
 				set_pos_bit();
 				break;
+			case 5:
+			{
+				char* src = "Hello world!";
+				char dst[15] = {0};
+				strcpy_test(dst, src);
+				printf("%s\n", dst);
+				break;
+			}
 			default:
 				//TODO
 				break;
