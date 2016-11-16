@@ -1,5 +1,6 @@
-# debug_grub2
-Debug grub2 using gdb
+# Learn linux startup
+
+# stage 1: Debug grub2 using gdb
 
 # Download grub2 source code and compile it
 1. download grub2 from ftp://ftp.gnu.org/gnu/grub/
