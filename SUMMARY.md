@@ -1,4 +1,4 @@
 # Summary
 
-* grub2
+* [grub2](MBR)
 
