@@ -12,8 +12,7 @@ then
 fi
 
 # grub-install utility
-#GRUB_UTILITY=/home/start-kernel/work_space/grub-2.00/install/sbin/grub-install
-GRUB_UTILITY=grub-install
+GRUB_UTILITY=$PWD/grub-2.00/install/sbin/grub-install
 DEFAULT_GRUB_UTILITY=false
 # Name of disk image
 IMAGE=disk

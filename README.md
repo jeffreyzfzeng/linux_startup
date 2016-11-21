@@ -4,8 +4,12 @@
 
 # Download grub2 source code and compile it
 1. download grub2 from ftp://ftp.gnu.org/gnu/grub/
+2. Go to grub-2.00 source code directory
 2. configure make file
     ./configure --prefix=DIR    # DIR: install grub2 under this folder after compile complete
+
+    for example: 
+    ./configure --prefix=$PWD/install
 3. compile and install
     make
     make install
@@ -20,9 +24,13 @@
 6. open another terminal, go to grub source code folder grub-2.00/grub-core
    gdb -x gdb_grub
 7. set break point:
-   break *0x7c00
-   press 'c'
+       break *0x7c00
+       press 'c' to continue
 8. start debug grub source code as you want
+
+If gdb could not resolve symbol file of grub2 source code, execute command: load_all_modules
+load_all_modules loads new inserted grub2 modules' symbol file in gdb environment
+
 
 # create_grub2_boot_disk_img.sh:
 This script create bootable disk img with both grub2 in ubuntu or self compiled grub2 utility
