@@ -31,6 +31,9 @@
 If gdb could not resolve symbol file of grub2 source code, execute command: load_all_modules
 load_all_modules loads new inserted grub2 modules' symbol file in gdb environment
 
+Without grub.cfg and linux image in disk.img, after grub_load_normal_normal, grub2 go to grub console window wait for further operations.
+
+
 
 # create_grub2_boot_disk_img.sh:
 This script create bootable disk img with both grub2 in ubuntu or self compiled grub2 utility
