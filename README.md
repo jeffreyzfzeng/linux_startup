@@ -36,8 +36,9 @@ Without grub.cfg and linux image in disk.img, after grub_load_normal_normal, gru
 
 
 # create_grub2_boot_disk_img.sh:
-This script create bootable disk img with both grub2 in ubuntu or self compiled grub2 utility
-
+1. Create bootable disk img with both grub2 in ubuntu or self compiled grub2 utility
+2. Copy kernel image to disk img
+3. Generate configure file used by grub2
 
 # Compile linux kernel
 1. Download linux source code and extract it.
