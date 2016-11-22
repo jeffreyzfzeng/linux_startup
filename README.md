@@ -38,3 +38,15 @@ Without grub.cfg and linux image in disk.img, after grub_load_normal_normal, gru
 # create_grub2_boot_disk_img.sh:
 This script create bootable disk img with both grub2 in ubuntu or self compiled grub2 utility
 
+
+# Compile linux kernel
+1. Download linux source code and extract it.
+2. Create config file and save config file:
+	make menuconfig
+	or make defconfig
+   result saved in .config file, make sure CONFIG_DEBUG_INFO set as 'y'
+3. Compile kernel source code and install it
+	make
+	make install
+4. New kernel image could be found under /boot with version information as suffix
+5. Copy grub.cfg linux kernel image to disk file

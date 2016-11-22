@@ -2,6 +2,7 @@
 #
 # Feng Jin 2016/10/18
 # Create a bootable disk image with grub2
+# Copy kernel img file to disk image
 #
 
 # Check current user, only root user allowed to run this script
@@ -22,6 +23,14 @@ LOOPDEV=$(losetup -f)
 MOUNT_POINT=/mnt/disk_img_mk
 # Device map of loop device
 DEV_MAP=$(echo ${LOOPDEV} | cut -d'/' -f 3)
+# Init ram disk file
+INITRD=initrd.img
+# vmlinuz file
+VMLINUZ=vmlinuz
+# kernel source code version
+KER_VER=2.6.32.69
+# boot directory
+BOOT=/boot
 
 # Delete disk image if exists
 if [[ -f ${IMAGE}.img ]]
@@ -84,6 +93,25 @@ mkdir -p ${MOUNT_POINT}/boot/grub
 
 # Install grub2
 ${GRUB_UTILITY} --no-floppy --boot-directory=${MOUNT_POINT}/boot --modules="ext2 part_msdos" ${LOOPDEV}
+
+# Copy compiled kernel image to disk
+# Check vmlinuz and initrd exist
+if [[ -f ${BOOT}/${VMLINUZ}-${KER_VER} && -f ${BOOT}/${INITRD}-${KER_VER} ]]
+then
+    cp ${BOOT}/${VMLINUZ}-${KER_VER} ${BOOT}/${INITRD}-${KER_VER} ${MOUNT_POINT}/boot
+    cat > ${MOUNT_POINT}/boot/grub/grub.cfg <<- 'EOF'
+set timeout=10
+set default=0
+
+menuentry 'linux OS' {
+    set root=(hd0,1)
+    linux /boot/vmlinuz-2.6.32.69 root=/dev/sda
+    initrd /boot/initrd.img-2.6.32.69
+}
+EOF
+else
+echo "ERROR: Check if vmlinuz and initrd exist" 1>&2
+fi
 
 # Unmount the filesystem, remove partition and delete loopback device
 umount ${MOUNT_POINT}
