@@ -72,6 +72,20 @@ end
 
 ###
 
+define print_all_modules
+	set $this = grub_dl_head
+	while ($this != 0)
+		print $this->name
+		print $this->init
+		set $this = $this->next
+	end
+end
+document print_all_modules 
+	Print all loaded modules
+end
+
+###
+
 set confirm off
 file kernel.exec
 target remote :1234
