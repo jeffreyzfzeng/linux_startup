@@ -100,7 +100,7 @@ if [[ -f ${BOOT}/${VMLINUZ}-${KER_VER} && -f ${BOOT}/${INITRD}-${KER_VER} ]]
 then
     cp ${BOOT}/${VMLINUZ}-${KER_VER} ${BOOT}/${INITRD}-${KER_VER} ${MOUNT_POINT}/boot
     cat > ${MOUNT_POINT}/boot/grub/grub.cfg <<- 'EOF'
-set timeout=10
+set timeout=120
 set default=0
 
 menuentry 'linux OS' {
