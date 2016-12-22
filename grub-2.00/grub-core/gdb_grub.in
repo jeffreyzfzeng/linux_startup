@@ -86,6 +86,22 @@ end
 
 ###
 
+define print_scanline_events_in_grub_mmap_iterate
+	set $idx = 0
+	set $all_events = 2*mmap_num
+	while ($idx < $all_events)
+		print /x scanline_events[$idx].pos
+		print /x scanline_events[$idx].type
+		print /x scanline_events[$idx].memtype 
+		set $idx = $idx + 1
+	end
+end
+document print_scanline_events_in_grub_mmap_iterate
+	Print scanline_events in grub_mmap_iterate
+end
+
+###
+
 set confirm off
 file kernel.exec
 target remote :1234
