@@ -107,9 +107,12 @@ file kernel.exec
 target remote :1234
 
 # inform when module is loaded
-break grub_dl_add
-commands
-	silent
-	load_module mod
-	cont
-end
+#break grub_dl_add
+#commands
+#	silent
+#	load_module mod
+#	cont
+#end
+
+break grub_main
+break grub_load_normal_mode
