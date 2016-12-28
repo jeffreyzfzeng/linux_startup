@@ -75,8 +75,7 @@ end
 define print_all_modules
 	set $this = grub_dl_head
 	while ($this != 0)
-		print $this->name
-		print $this->init
+		printf "%s: %s->init: 0x%x\n", $this->name, $this->name, $this->init
 		set $this = $this->next
 	end
 end
@@ -90,14 +89,23 @@ define print_scanline_events_in_grub_mmap_iterate
 	set $idx = 0
 	set $all_events = 2*mmap_num
 	while ($idx < $all_events)
-		print /x scanline_events[$idx].pos
-		print /x scanline_events[$idx].type
-		print /x scanline_events[$idx].memtype 
+		printf "scanline_events[%d]: pos = 0x%x; type = 0x%x; memtype = 0x%x\n", $idx, scanline_events[$idx].pos, scanline_events[$idx].type, scanline_events[$idx].memtype
 		set $idx = $idx + 1
 	end
 end
 document print_scanline_events_in_grub_mmap_iterate
 	Print scanline_events in grub_mmap_iterate
+end
+
+define print_chunks
+	set $this = rel->chunks
+	while ($this != 0)
+		printf "chunk: 0x%x, src = 0x%x, target = 0x%x, srcv = 0x%x, size = 0x%x\n", $this, $this->src, $this->target, $this->srcv, $this->size
+		set $this = $this->next
+	end
+end
+document print_chunks
+	print chunks address
 end
 
 ###
