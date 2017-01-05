@@ -98,7 +98,7 @@ document print_scanline_events_in_grub_mmap_iterate
 end
 
 define print_chunks
-	set $this = rel->chunks
+	set $this = $arg0->chunks
 	while ($this != 0)
 		printf "chunk: 0x%x, src = 0x%x, target = 0x%x, srcv = 0x%x, size = 0x%x\n", $this, $this->src, $this->target, $this->srcv, $this->size
 		set $this = $this->next
