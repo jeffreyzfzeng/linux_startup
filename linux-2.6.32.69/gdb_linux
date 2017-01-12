@@ -1,0 +1,25 @@
+### 
+###
+###
+### Set environment for linux debug with gdb
+###
+### 2017/01/12
+### Feng Jin
+### jinf82@gmail.com
+###
+###
+###
+###
+
+
+###
+
+set confirm off
+target remote :1234
+
+###
+### load symbol of vmlinux
+###
+file vmlinux
+
+break start_kernel
