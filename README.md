@@ -57,9 +57,13 @@ Without grub.cfg and linux image in disk.img, after grub_load_normal_normal, gru
 take initrd.img-2.6.32.69 as an example
 
 zcat /boot/initrd.img-2.6.32.69 > $HOME/initrd.img-2.6.32.69.cpio
+
 cd $HOME
+
 mkdir initramfs
+
 cd initramfs
+
 cpio -vid < ../initrd.img-2.6.32.69.cpio
 
 init script is stored under root directory `/`
